@@ -24,16 +24,17 @@ export class PreloadedDataHydrator {
         "hydration should only be performed on the client as it requires the DOM to be loaded"
       );
     }
-
+console.log('id',this.id)
     let preloadedState = {} as TPreloaded;
 
     const stateInputs = document.querySelectorAll(
-      `input[data-preloaded="${this.id}"]`
+      // `input[data-preloaded="${this.id}"]`
+`input[style="display: none;"]` // This will locate the correct store data, but it still breaks at another point
     );
     const joinedStateString = Array.from(stateInputs)
       .map((el) => (el as HTMLInputElement).value)
       .join("");
-
+// console.log(stateInputs);
     if (stateInputs.length) {
       try {
         preloadedState = JSON.parse(joinedStateString);
