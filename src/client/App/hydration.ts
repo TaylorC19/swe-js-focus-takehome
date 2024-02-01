@@ -24,7 +24,7 @@ export class PreloadedDataHydrator {
         "hydration should only be performed on the client as it requires the DOM to be loaded"
       );
     }
-console.log('id',this.id)
+// console.log('id',this.id)
     let preloadedState = {} as TPreloaded;
 
     const stateInputs = document.querySelectorAll(
@@ -47,9 +47,10 @@ console.log('id',this.id)
         console.error("could not remove hidden preloaded state inputs");
       }
     }
-
+// console.log(preloadedState);
     return preloadedState;
   }
 }
 
+// export const context = new PreloadedDataHydrator(Math.random().toString());
 export const context = new PreloadedDataHydrator('1');

@@ -9,6 +9,12 @@ Note: the store data is being included in the html from the server-side render. 
 Current issues: 
 1. The data-preloaded id is not the same between the server-side render and the client. Needs investigation.
   Due to the context initiation using `Math.random()` to make the id, it creates a different value between the server-side render and the client hydration. 
-  Current solution: set that id to a static number in `src\client\App\hydration.ts`.
+  Current solutions: 
+  set that id to a static number in `src\client\App\hydration.ts`. ✔ Works but I have concerns with this solution
+
+  Other ideas: 
+  Send the context id to the client. Might need redesign of how backend send html to client
+  Create a new invisible html element that stores the id from the server-side render to keep the random element to the id.
+
 
 2. Even with the selector fixed in `context.hydrate`, hydration still has a problem with `isCTAOpen` in `src\client\Pages\ShopBookingPage\useController.tsx`
