@@ -28,8 +28,7 @@ console.log('id',this.id)
     let preloadedState = {} as TPreloaded;
 
     const stateInputs = document.querySelectorAll(
-      // `input[data-preloaded="${this.id}"]`
-`input[style="display: none;"]` // This will locate the correct store data, but it still breaks at another point
+      `input[data-preloaded="${this.id}"]`
     );
     const joinedStateString = Array.from(stateInputs)
       .map((el) => (el as HTMLInputElement).value)
@@ -53,4 +52,4 @@ console.log('id',this.id)
   }
 }
 
-export const context = new PreloadedDataHydrator(Math.random().toString());
+export const context = new PreloadedDataHydrator('1');
