@@ -18,7 +18,7 @@ export function useController(): Controller {
     isCTAOpen: false,
     partySize: new PartySize(shop.config, menu.items),
   });
-console.log(state)
+
   const api: Controller = {
     ...state,
     title: `welcome to ${shop.config.slug}`,
