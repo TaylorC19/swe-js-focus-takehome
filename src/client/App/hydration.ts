@@ -24,7 +24,7 @@ export class PreloadedDataHydrator {
         "hydration should only be performed on the client as it requires the DOM to be loaded"
       );
     }
-// console.log('id',this.id)
+
     let preloadedState = {} as TPreloaded;
 
     const stateInputs = document.querySelectorAll(
@@ -33,7 +33,7 @@ export class PreloadedDataHydrator {
     const joinedStateString = Array.from(stateInputs)
       .map((el) => (el as HTMLInputElement).value)
       .join("");
-// console.log(stateInputs);
+
     if (stateInputs.length) {
       try {
         preloadedState = JSON.parse(joinedStateString);
@@ -47,7 +47,7 @@ export class PreloadedDataHydrator {
         console.error("could not remove hidden preloaded state inputs");
       }
     }
-// console.log(preloadedState);
+
     return preloadedState;
   }
 }
