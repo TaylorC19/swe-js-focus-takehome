@@ -10,6 +10,7 @@ type Props = {
 };
 
 export function App({ store }: Props): JSX.Element {
+  
   return (
     <Providers store={store}>
       <ShopBookingPage />
