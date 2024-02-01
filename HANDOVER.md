@@ -18,3 +18,4 @@ Current issues:
 
 
 2. Even with the selector fixed in `context.hydrate`, hydration still has a problem with `isCTAOpen` in `src\client\Pages\ShopBookingPage\useController.tsx`
+  solution: renderModal was using `this` statements when it should have been using state/api.
