@@ -52,14 +52,14 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
   return (
     <div data-testid="Party Size List">
       <form onSubmit={submissionHandler} action="">
-        <>
+        <div data-testid="Party Size List Adults Counter">
           <label htmlFor="adult"># of adults:</label>
           <input
             value={adult}
             disabled={true}
             type="number"
             name="adult"
-            data-testid="Party Size List Adults Counter"
+            id="adult"
             onChange={adultHandler}
           />
           <button
@@ -77,17 +77,17 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
           >
             +
           </button>
-        </>
+        </div>
         {partySize.getShop().showChild && (
-          <>
-            <br />
+          <div data-testid="Party Size List Children Counter">
+            
             <label htmlFor="children"># of children:</label>
             <input
               value={child}
               disabled={true}
               type="number"
-              name="children"
-              data-testid="Party Size List Children Counter"
+              name="child"
+              id="child"
               onChange={childHandler}
             />
             <button
@@ -105,18 +105,18 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
             >
               +
             </button>
-          </>
+          </div>
         )}
         {partySize.getShop().showSenior && (
-          <>
-            <br />
+          <div data-testid="Party Size List Seniors Counter">
+            
             <label htmlFor="seniors"># of seniors:</label>
             <input
               value={senior}
               disabled={true}
               type="number"
-              name="seniors"
-              data-testid="Party Size List Seniors Counter"
+              name="senior"
+              id="senior"
               onChange={seniorHandler}
             />
             <button
@@ -134,18 +134,18 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
             >
               +
             </button>
-          </>
+          </div>
         )}
         {partySize.getShop().showBaby && (
-          <>
-            <br />
+          <div data-testid="Party Size List Babies Counter">
+            
             <label htmlFor="babies"># of babies:</label>
             <input
               value={baby}
               disabled={true}
               type="number"
-              name="babies"
-              data-testid="Party Size List Babies Counter"
+              name="baby"
+              id="baby"
               onChange={babyHandler}
             />
             <button
@@ -163,7 +163,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
             >
               +
             </button>
-          </>
+          </div>
         )}
         <br />
         {showError && <p id="error">{errorMessage}</p>}

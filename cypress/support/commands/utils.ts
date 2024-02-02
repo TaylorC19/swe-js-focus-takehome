@@ -11,7 +11,7 @@ declare global {
 Cypress.Commands.add("getByTestId", (...testids) => {
   const selector = testids
     .map((testid) => `[data-testid="${testid}"]`)
-    .join(", ");
+    .join(" ");
 
   return cy.get(selector);
 });
