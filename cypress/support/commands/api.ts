@@ -17,6 +17,7 @@ declare global {
 
 Cypress.Commands.add("mock", (match, producer, key) =>
   cy.then(async () => {
+    console.log(client);
     const [method, path, statusCode] = match.split(" ");
     const response = client[match](producer);
 
