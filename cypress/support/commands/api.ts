@@ -19,6 +19,8 @@ Cypress.Commands.add("mock", (match, producer, key) =>
   cy.then(async () => {
     console.log(client);
     const [method, path, statusCode] = match.split(" ");
+    console.log(match)
+    // const response = client['get /shops/:shop 200'](producer);
     const response = client[match](producer);
 
     await axios.post("/mock", {
