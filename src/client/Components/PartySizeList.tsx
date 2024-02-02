@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PartySize } from "../Pages/ShopBookingPage/PartySize";
 
 type Props = {
@@ -12,25 +12,27 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
   const [child, setChild] = useState<number>(0);
   const [baby, setBaby] = useState<number>(0);
   const [senior, setSenior] = useState<number>(0);
-  console.log(partySize);
+  const [totalPeople, setTotalPeople] = useState<number>(0);
+
+  useEffect(() => {
+    setTotalPeople(adult + child + baby + senior);
+  }, [adult, child, baby, senior])
 
   const submissionHandler = (e) => {
     e.preventDefault();
-    let people = adult + child + baby + senior;
     try {
       const max = partySize.getShop().maxNumPeople;
       const min = partySize.getShop().minNumPeople;
-      if (people > max) {
+      if (totalPeople > max) {
         setErrorMessage(`This restaurant is limited to ${max} people per reservation.`);
         setShowError(true);
-      } else if (people < min) {
+      } else if (totalPeople < min) {
         setErrorMessage(`This restaurant requires at least ${min} people to make a reservation.`);
         setShowError(true);
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-    console.log('handler')
   }
 
   const adultHandler = (e) => {
@@ -73,6 +75,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
           <button
             type="button"
             onClick={(e) => setAdult(adult + 1)}
+            disabled={totalPeople >= partySize.getShop().maxNumPeople}
             data-testid="Counter Add Button"
           >
             +
@@ -80,7 +83,6 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
         </div>
         {partySize.getShop().showChild && (
           <div data-testid="Party Size List Children Counter">
-            
             <label htmlFor="children"># of children:</label>
             <input
               value={child}
@@ -101,6 +103,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
             <button
               type="button"
               onClick={(e) => setChild(child + 1)}
+              disabled={totalPeople >= partySize.getShop().maxNumPeople}
               data-testid="Counter Add Button"
             >
               +
@@ -109,7 +112,6 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
         )}
         {partySize.getShop().showSenior && (
           <div data-testid="Party Size List Seniors Counter">
-            
             <label htmlFor="seniors"># of seniors:</label>
             <input
               value={senior}
@@ -130,6 +132,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
             <button
               type="button"
               onClick={(e) => setSenior(senior + 1)}
+              disabled={totalPeople >= partySize.getShop().maxNumPeople}
               data-testid="Counter Add Button"
             >
               +
@@ -138,7 +141,6 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
         )}
         {partySize.getShop().showBaby && (
           <div data-testid="Party Size List Babies Counter">
-            
             <label htmlFor="babies"># of babies:</label>
             <input
               value={baby}
@@ -159,6 +161,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
             <button
               type="button"
               onClick={(e) => setBaby(baby + 1)}
+              disabled={totalPeople >= partySize.getShop().maxNumPeople}
               data-testid="Counter Add Button"
             >
               +

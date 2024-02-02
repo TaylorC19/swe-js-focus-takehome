@@ -63,7 +63,7 @@ describe("reservation: party size", () => {
     });
 
     cy.getByTestId(ids.ADULTS, ids.COUNTER.SUBTRACT).click();
-    cy.getByTestId(ids.ADULTS, ids.COUNTER.SUBTRACT).click();
+    cy.getByTestId(ids.SENIORS, ids.COUNTER.SUBTRACT).click();
     [ids.ADULTS, ids.CHILDREN, ids.BABIES, ids.SENIORS].forEach((testid) => {
       cy.getByTestId(testid, ids.COUNTER.SUBTRACT).should("be.disabled");
     });
@@ -71,11 +71,14 @@ describe("reservation: party size", () => {
     cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
     cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
     cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
+    cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
+    cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
+    cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
     [ids.ADULTS, ids.CHILDREN, ids.BABIES, ids.SENIORS].forEach((testid) => {
       cy.getByTestId(testid, ids.COUNTER.ADD).should("be.disabled");
     });
 
-    [ids.CHILDREN, ids.BABIES].forEach((testid) => {
+    [ids.CHILDREN, ids.BABIES, ids.SENIORS].forEach((testid) => {
       cy.getByTestId(testid, ids.COUNTER.SUBTRACT).should("be.disabled");
     });
   });
