@@ -79,6 +79,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
         </>
         {partySize.getShop().showChild && (
           <>
+            <br />
             <label htmlFor="children"># of children:</label>
             <input
               value={child}
@@ -106,6 +107,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
         )}
         {partySize.getShop().showSenior && (
           <>
+            <br />
             <label htmlFor="seniors"># of seniors:</label>
             <input
               value={senior}
@@ -133,6 +135,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
         )}
         {partySize.getShop().showBaby && (
           <>
+            <br />
             <label htmlFor="babies"># of babies:</label>
             <input
               value={baby}
