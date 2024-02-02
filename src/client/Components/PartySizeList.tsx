@@ -56,6 +56,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
           <label htmlFor="adult"># of adults:</label>
           <input
             value={adult}
+            disabled={true}
             type="number"
             name="adult"
             data-testid="Party Size List Adults Counter"
@@ -83,6 +84,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
             <label htmlFor="children"># of children:</label>
             <input
               value={child}
+              disabled={true}
               type="number"
               name="children"
               data-testid="Party Size List Children Counter"
@@ -111,6 +113,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
             <label htmlFor="seniors"># of seniors:</label>
             <input
               value={senior}
+              disabled={true}
               type="number"
               name="seniors"
               data-testid="Party Size List Seniors Counter"
@@ -139,6 +142,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
             <label htmlFor="babies"># of babies:</label>
             <input
               value={baby}
+              disabled={true}
               type="number"
               name="babies"
               data-testid="Party Size List Babies Counter"
