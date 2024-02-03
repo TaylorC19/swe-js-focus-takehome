@@ -1,4 +1,4 @@
-import React, {MouseEventHandler} from "react";
+import React, { MouseEventHandler } from "react";
 
 type Props = {
   title: string;
@@ -8,21 +8,61 @@ type Props = {
   quantity: number;
   minQty: number;
   maxQty: number;
+  totalFoodItems: number;
+  totalPeople: number;
   onAdd: MouseEventHandler<HTMLButtonElement>;
   onSubtract: MouseEventHandler<HTMLButtonElement>;
+  testId: string;
 };
 
-export const MenuItem = ({ title, key, description, isGroupOrder, quantity, minQty, maxQty, onAdd, onSubtract }:Props): JSX.Element => {
+export const MenuItem = ({
+  title,
+  key,
+  description,
+  isGroupOrder,
+  totalFoodItems,
+  totalPeople,
+  quantity,
+  minQty,
+  maxQty,
+  onAdd,
+  onSubtract,
+  testId,
+}: Props): JSX.Element => {
   return (
-    <div>
-      <h2>{title}</h2>
+    <div data-testid={testId}>
+      <h3>{title}</h3>
       <p>{description}</p>
 
       <div>
         <input type="number" name="" id="" value={quantity} />
-        <button type="button" disabled={quantity <= minQty} onClick={onSubtract}>-</button>
-        <button type="button" disabled={quantity >= maxQty} onClick={onAdd}>+</button>
+        <button
+          type="button"
+          disabled={quantity === 0}
+          onClick={onSubtract}
+          data-testid="Counter Subtract Button"
+        >
+          -
+        </button>
+        <button
+          type="button"
+          disabled={
+            quantity >= maxQty ||
+            quantity >= totalPeople ||
+            totalFoodItems >= totalPeople
+          }
+          onClick={onAdd}
+          data-testid="Counter Add Button"
+        >
+          +
+        </button>
       </div>
+      {minQty > 0 && (
+        <p>This item requires a minimum of {minQty} servings to order.</p>
+      )}
+      {maxQty > 0 && maxQty !== Infinity && (
+        <p>This item is limited to {maxQty} per order or one per person.</p>
+      )}
     </div>
-  )
-}
+  );
+};

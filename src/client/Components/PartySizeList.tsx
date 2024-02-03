@@ -17,6 +17,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
   const [senior, setSenior] = useState<number>(0);
   const [totalPeople, setTotalPeople] = useState<number>(0);
   const [menuItemQuantities, setMenuItemQuantities] = useState<Record<number, number>>({})
+  const [totalFoodItems, setTotalFoodItems] = useState<number>(0)
   const max = partySize.getMaxPartySize();
   const min = partySize.getMinPartySize();
 console.log(partySize)
@@ -24,18 +25,27 @@ console.log(partySize)
     setTotalPeople(adult + child + baby + senior);
   }, [adult, child, baby, senior]);
 
-  const handleAddMenuItem = (itemId: number) => {
+  const handleAddMenuItem = (itemId: number, minOrderQty: number) => {
     setMenuItemQuantities((prevQuantities) => ({
       ...prevQuantities,
-      [itemId]: (prevQuantities[itemId] || 0) + 1,
+      [itemId]: Math.max((prevQuantities[itemId] || 0) + 1, minOrderQty),
     }));
-  }
+    setTotalFoodItems(totalFoodItems + 1)
+  };
 
-  const handleSubtractMenuItem = (itemId: number) => {
-    setMenuItemQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [itemId]: Math.max((prevQuantities[itemId] || 0) - 1, 0),
-    }));
+  const handleSubtractMenuItem = (itemId: number, minOrderQty) => {
+    if(menuItemQuantities[itemId] === minOrderQty) {
+      setMenuItemQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [itemId]: 0,
+      }));
+    } else {
+      setMenuItemQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [itemId]: Math.max((prevQuantities[itemId] || 0) - 1, 0),
+      }));
+    }
+    setTotalFoodItems(totalFoodItems - 1);
   };
 
   const submissionHandler = (e) => {
@@ -109,11 +119,12 @@ console.log(partySize)
           />
         )}
         <br />
-        <span>Min: {partySize.getMinPartySize()}</span>
+        <span>Min: {min}</span>
         <br />
-        <span>Max: {partySize.getMaxPartySize()}</span>
+        <span>Max: {max}</span>
         <br />
-        {partySize.getMenu().map((menuItem: MenuItemType) => {
+        {partySize.getMenu().length > 0 && <h2>Menu items</h2>}
+        {partySize.getMenu().map((menuItem: MenuItemType, index) => {
           let minQty = menuItem.minOrderQty < 0 ? 0 : menuItem.minOrderQty;
           let maxQty = menuItem.maxOrderQty < 0 ? Infinity : menuItem.maxOrderQty
           return (
@@ -125,8 +136,11 @@ console.log(partySize)
               quantity={menuItemQuantities[menuItem.id] || 0}
               minQty={minQty}
               maxQty={maxQty}
-              onAdd={() => handleAddMenuItem(menuItem.id)}
-              onSubtract={() => handleSubtractMenuItem(menuItem.id)}
+              totalFoodItems={totalFoodItems}
+              totalPeople={totalPeople}
+              onAdd={() => handleAddMenuItem(menuItem.id, minQty)}
+              onSubtract={() => handleSubtractMenuItem(menuItem.id, minQty)}
+              testId={`${index}`}
             />
           );
         })}
