@@ -29,4 +29,8 @@ export class PartySize {
   getShowChild() {
     return this.shop.showChild;
   }
+
+  getMenu() {
+    return this.menu;
+  }
 }

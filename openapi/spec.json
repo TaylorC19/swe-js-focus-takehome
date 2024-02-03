@@ -41,7 +41,7 @@
         }
       }
     },
-    "/shops/{id}/menu": {
+    "/shops/{shop}/menu": {
       "get": {
         "summary": "Get a single shop's menu",
         "responses": {
@@ -50,43 +50,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "id",
-                      "title",
-                      "description",
-                      "isGroupOrder",
-                      "minOrderQty",
-                      "maxOrderQty"
-                    ],
-                    "$ref": "#/components/schemas/MenuItem"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/shops/{shop}": {
-      "get": {
-        "summary": "Get a single shop",
-        "responses": {
-          "200": {
-            "description": "All went well",
-            "content": {
-              "application/json": {
-                "schema": {
                   "required": [
-                    "slug",
-                    "minNumPeople",
-                    "maxNumPeople",
-                    "showBaby",
-                    "showChild",
-                    "showSenior"
+                    "id",
+                    "title",
+                    "description",
+                    "isGroupOrder",
+                    "minOrderQty",
+                    "maxOrderQty"
                   ],
-                  "$ref": "#/components/schemas/Shop"
+                  "$ref": "#/components/schemas/MenuItem"
                 }
               }
             }
@@ -94,7 +66,7 @@
         }
       }
     },
-    "/shops/{shop}/menu": {
+    "/shops/{id}/menu": {
       "get": {
         "summary": "Get a single shop's menu",
         "responses": {
