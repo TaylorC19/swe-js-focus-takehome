@@ -34,29 +34,27 @@ export const MenuItem = ({
       <h3>{title}</h3>
       <p>{description}</p>
 
-      <div>
-        <input type="number" name="" id="" value={quantity} />
-        <button
-          type="button"
-          disabled={quantity === 0}
-          onClick={onSubtract}
-          data-testid="Counter Subtract Button"
-        >
-          -
-        </button>
-        <button
-          type="button"
-          disabled={
-            quantity >= maxQty ||
-            quantity >= totalPeople ||
-            totalFoodItems >= totalPeople
-          }
-          onClick={onAdd}
-          data-testid="Counter Add Button"
-        >
-          +
-        </button>
-      </div>
+      <input disabled={true} type="number" name="" id="" value={quantity} />
+      <button
+        type="button"
+        disabled={quantity === 0}
+        onClick={onSubtract}
+        data-testid="Counter Subtract Button"
+      >
+        -
+      </button>
+      <button
+        type="button"
+        disabled={
+          quantity >= maxQty ||
+          quantity >= totalPeople ||
+          totalFoodItems >= totalPeople
+        }
+        onClick={onAdd}
+        data-testid="Counter Add Button"
+      >
+        +
+      </button>
       {minQty > 0 && (
         <p>This item requires a minimum of {minQty} servings to order.</p>
       )}
