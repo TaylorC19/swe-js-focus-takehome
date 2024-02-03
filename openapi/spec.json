@@ -41,9 +41,34 @@
         }
       }
     },
+    "/shops/{shop}": {
+      "get": {
+        "summary": "Get a single shop",
+        "responses": {
+          "200": {
+            "description": "All went well",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "slug",
+                    "minNumPeople",
+                    "maxNumPeople",
+                    "showBaby",
+                    "showChild",
+                    "showSenior"
+                  ],
+                  "$ref": "#/components/schemas/Shop"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/shops/{shop}/menu": {
       "get": {
-        "summary": "Get a single shop's menu",
+        "summary": "Get a single menu item",
         "responses": {
           "200": {
             "description": "All went well",
