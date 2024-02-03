@@ -21,8 +21,8 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
   const submissionHandler = (e) => {
     e.preventDefault();
     try {
-      const max = partySize.getShop().maxNumPeople;
-      const min = partySize.getShop().minNumPeople;
+      const max = partySize.getMaxPartySize();
+      const min = partySize.getMinPartySize();
       if (totalPeople > max) {
         setErrorMessage(
           `This restaurant is limited to ${max} people per reservation.`

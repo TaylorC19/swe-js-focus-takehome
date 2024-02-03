@@ -10,7 +10,11 @@ export class PartySize {
     this.menu = menu;
   }
 
-  getShop() {
-    return this.shop;
+  getMinPartySize() {
+    return this.shop.minNumPeople;
+  }
+
+  getMaxPartySize() {
+    return this.shop.maxNumPeople;
   }
 }
