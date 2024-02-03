@@ -9,4 +9,8 @@ export class PartySize {
     this.shop = shop;
     this.menu = menu;
   }
+
+  getShop() {
+    return this.shop;
+  }
 }
