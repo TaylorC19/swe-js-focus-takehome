@@ -8,7 +8,7 @@ type Props = {
 export const PartySizeList = ({ partySize }: Props): JSX.Element => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [showError, setShowError] = useState<boolean>(false);
-  const [adult, setAdult] = useState<number>(0);
+  const [adult, setAdult] = useState<number>(partySize.getMinPartySize());
   const [child, setChild] = useState<number>(0);
   const [baby, setBaby] = useState<number>(0);
   const [senior, setSenior] = useState<number>(0);
@@ -71,7 +71,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
           <button
             type="button"
             onClick={(e) => setAdult(adult - 1)}
-            disabled={adult <= 0}
+            disabled={adult <= partySize.getMinPartySize() - senior}
             data-testid="Counter Subtract Button"
           >
             -
@@ -128,7 +128,10 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
             <button
               type="button"
               onClick={(e) => setSenior(senior - 1)}
-              disabled={senior <= 0}
+              disabled={
+                senior <= partySize.getMinPartySize() - adult ||
+                senior <= 0
+              }
               data-testid="Counter Subtract Button"
             >
               -
