@@ -24,7 +24,7 @@ describe("page load", () => {
 
 describe("reservation: party size", () => {
   it("should respect min and max totals across all age groups", () => {
-    cy.mock("get /shops/:id 200", (draft) => {
+    cy.mock("get /shops/:shop 200", (draft) => {
       draft.minNumPeople = 3;
       draft.maxNumPeople = 6;
       draft.showBaby = true;
@@ -32,7 +32,7 @@ describe("reservation: party size", () => {
       draft.showSenior = true;
     });
 
-    cy.mock("get /shops/:id/menu 200", (draft) => {
+    cy.mock("get /shops/:shop/menu 200", (draft) => {
       draft.splice(0, draft.length);
     });
 
@@ -92,7 +92,7 @@ describe("reservation: party size", () => {
       draft.showSenior = true;
     });
 
-    cy.mock("get /shops/:id/menu 200", (draft) => {
+    cy.mock("get /shops/:shop/menu 200", (draft) => {
       draft.splice(0, draft.length);
       draft.push(
         client["get /shops/:shop/menu 200"]((item) => {

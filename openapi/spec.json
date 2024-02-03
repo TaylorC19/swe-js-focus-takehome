@@ -16,7 +16,7 @@
     }
   ],
   "paths": {
-    "/shops/{id}": {
+    "/shops/{shop}": {
       "get": {
         "summary": "Get a single shop",
         "responses": {
@@ -41,7 +41,7 @@
         }
       }
     },
-    "/shops/{id}/menu": {
+    "/shops/{shop}/menu": {
       "get": {
         "summary": "Get a single shop's menu",
         "responses": {
