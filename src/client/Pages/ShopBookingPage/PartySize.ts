@@ -17,4 +17,16 @@ export class PartySize {
   getMaxPartySize() {
     return this.shop.maxNumPeople;
   }
+
+  getShowSenior() {
+    return this.shop.showSenior;
+  }
+
+  getShowBaby() {
+    return this.shop.showBaby;
+  }
+
+  getShowChild() {
+    return this.shop.showChild;
+  }
 }
