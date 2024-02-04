@@ -123,27 +123,29 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
         <br />
         <span>Max: {max}</span>
         <br />
-        {partySize.getMenu().length > 0 && <h2>Menu items</h2>}
-        {partySize.getMenu().map((menuItem: MenuItemType, index) => {
-          let minQty = menuItem.minOrderQty < 0 ? 0 : menuItem.minOrderQty;
-          let maxQty = menuItem.maxOrderQty < 0 ? 10 : menuItem.maxOrderQty
-          return (
-            <MenuItem
-              title={menuItem.title}
-              key={menuItem.id}
-              description={menuItem.description}
-              isGroupOrder={menuItem.isGroupOrder}
-              quantity={menuItemQuantities[menuItem.id] || 0}
-              minQty={minQty}
-              maxQty={maxQty}
-              totalFoodItems={totalFoodItems}
-              totalPeople={totalPeople}
-              onAdd={() => handleAddMenuItem(menuItem.id, minQty)}
-              onSubtract={() => handleSubtractMenuItem(menuItem.id, minQty)}
-              testId={`${index}`}
-            />
-          );
-        })}
+        {(partySize.getMenu().length > 0 &&
+          Array.isArray(partySize.getMenu())) && <h2>Menu items</h2>}
+        {Array.isArray(partySize.getMenu()) &&
+          partySize.getMenu().map((menuItem: MenuItemType, index) => {
+            let minQty = menuItem.minOrderQty < 0 ? 0 : menuItem.minOrderQty;
+            let maxQty = menuItem.maxOrderQty < 0 ? 10 : menuItem.maxOrderQty;
+            return (
+              <MenuItem
+                title={menuItem.title}
+                key={menuItem.id}
+                description={menuItem.description}
+                isGroupOrder={menuItem.isGroupOrder}
+                quantity={menuItemQuantities[menuItem.id] || 0}
+                minQty={minQty}
+                maxQty={maxQty}
+                totalFoodItems={totalFoodItems}
+                totalPeople={totalPeople}
+                onAdd={() => handleAddMenuItem(menuItem.id, minQty)}
+                onSubtract={() => handleSubtractMenuItem(menuItem.id, minQty)}
+                testId={`${index}`}
+              />
+            );
+          })}
 
         {showError && <p id="error">{errorMessage}</p>}
         <button type="submit">Submit</button>
