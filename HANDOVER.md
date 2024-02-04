@@ -1,7 +1,13 @@
-Task 2:
+## Task 4:
 
-Currently in `e2e.spec.ts` on lines 92-104. They regularly fail to upload the menu itmes to `/shops/:id/menu`. I have yet to find the cause. It was working find one day, then the next morning all I can get for the menu is an empty array. 
+I implemented the teardown endpoint in cypress (it already existed in openAPI server.ts but wasn't added to cypress api or in the test).
 
-I have confirmed with console logs that the two elements generated with `client["get /shops/:shop/menu 200"]` are correct and have no issues. The issue seems to be in saving that to `/shops/:id/menu`. When running only the second test starting on line 83, it is more likely to save the menu.
+  - test are now repeatable without restarting cypress
+  - new describe block that test if the menu items respect the min and max quantities.
 
-When it does add the items correctly, each menu item is rendered in the pop up and each item follows minimum and maximum quantity. It also limits items based on party size.
+## Next
+
+  - Submission handler: it currently checks the people count, it should check the meal count as well
+  - Make the menu ordering a second step on a separate page after selecting the party size
+  - optional menu item image display
+  - add icons for adult, senior, child, and baby, and clean up the label and input row.
