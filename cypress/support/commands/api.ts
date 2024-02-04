@@ -11,6 +11,7 @@ declare global {
     interface Chainable {
       mock: (match: string, producer: any, key?: string) => Chainable;
       unmock: (key: string) => Chainable;
+      teardown: () => Chainable;
     }
   }
 }
@@ -33,3 +34,9 @@ Cypress.Commands.add("unmock", (key) =>
     await axios.post("/unmock", { key });
   })
 );
+
+Cypress.Commands.add("teardown", () => {
+  cy.then(async () => {
+    await axios.get("/teardown");
+  })
+})

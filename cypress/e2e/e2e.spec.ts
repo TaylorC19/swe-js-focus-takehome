@@ -78,6 +78,8 @@ describe("reservation: party size", () => {
     [ids.CHILDREN, ids.BABIES].forEach((testid) => {
       cy.getByTestId(testid, ids.COUNTER.SUBTRACT).should("be.disabled");
     });
+
+    cy.teardown();
   });
 
   it("should respect min max order qty for group orders", () => {
@@ -125,5 +127,7 @@ describe("reservation: party size", () => {
       cy.getByTestId(testid, ids.COUNTER.SUBTRACT).should("be.disabled");
       cy.getByTestId(testid, ids.COUNTER.ADD).should("be.disabled");
     });
+
+    cy.teardown();
   });
 });
