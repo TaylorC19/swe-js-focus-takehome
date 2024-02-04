@@ -20,7 +20,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
   const [totalFoodItems, setTotalFoodItems] = useState<number>(0)
   const max = partySize.getMaxPartySize();
   const min = partySize.getMinPartySize();
-console.log(partySize)
+
   useEffect(() => {
     setTotalPeople(adult + child + baby + senior);
   }, [adult, child, baby, senior]);
@@ -126,7 +126,7 @@ console.log(partySize)
         {partySize.getMenu().length > 0 && <h2>Menu items</h2>}
         {partySize.getMenu().map((menuItem: MenuItemType, index) => {
           let minQty = menuItem.minOrderQty < 0 ? 0 : menuItem.minOrderQty;
-          let maxQty = menuItem.maxOrderQty < 0 ? Infinity : menuItem.maxOrderQty
+          let maxQty = menuItem.maxOrderQty < 0 ? 10 : menuItem.maxOrderQty
           return (
             <MenuItem
               title={menuItem.title}
