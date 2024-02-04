@@ -61,6 +61,8 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
           `This restaurant requires at least ${min} people to make a reservation.`
         );
         setShowError(true);
+      } else {
+        // make axios request to endpoint
       }
     } catch (error) {
       console.error(error);

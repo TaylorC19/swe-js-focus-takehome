@@ -133,7 +133,7 @@ describe("reservation: party size", () => {
 });
 
 describe("reservation: menu order amounts", () => {
-  it("should respent the minimum quantity amount of an order", () => {
+  it("should respect the minimum and maximum quantities of the restaurant", () => {
     cy.mock("get /shops/:id 200", (draft) => {
       draft.minNumPeople = 3;
       draft.maxNumPeople = 6;
