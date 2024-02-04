@@ -13,6 +13,7 @@ type Props = {
   onAdd: MouseEventHandler<HTMLButtonElement>;
   onSubtract: MouseEventHandler<HTMLButtonElement>;
   testId: string;
+  className: string;
 };
 
 export const MenuItem = ({
@@ -28,13 +29,14 @@ export const MenuItem = ({
   onAdd,
   onSubtract,
   testId,
+  className
 }: Props): JSX.Element => {
   return (
-    <div data-testid={testId}>
+    <div className={className} data-testid={testId}>
       <h3>{title}</h3>
       <p>{description}</p>
 
-      <input disabled={true} type="number" name="" id="" value={quantity} />
+      <input disabled={true} type="number" name={testId} id="" value={quantity} />
       <button
         type="button"
         disabled={quantity === 0}
@@ -55,7 +57,7 @@ export const MenuItem = ({
       >
         +
       </button>
-      {minQty > 0 && (
+      {minQty > 1 && (
         <p>This item requires a minimum of {minQty} servings to order.</p>
       )}
       {maxQty > 0 && maxQty !== Infinity && (

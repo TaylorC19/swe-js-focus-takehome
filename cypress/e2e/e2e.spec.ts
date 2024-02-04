@@ -131,3 +131,76 @@ describe("reservation: party size", () => {
     cy.teardown();
   });
 });
+
+describe("reservation: menu order amounts", () => {
+  it("should respent the minimum quantity amount of an order", () => {
+    cy.mock("get /shops/:id 200", (draft) => {
+      draft.minNumPeople = 3;
+      draft.maxNumPeople = 6;
+      draft.showBaby = true;
+      draft.showChild = true;
+      draft.showSenior = true;
+    });
+
+    cy.mock("get /shops/:id/menu 200", (draft) => {
+      draft.splice(0, draft.length);
+      draft.push(
+        client["get /shops/:shop/menu 200"]((item) => {
+          item.isGroupOrder = true;
+          item.minOrderQty = 2;
+        }),
+        client["get /shops/:shop/menu 200"]((item) => {
+          item.isGroupOrder = true;
+          item.maxOrderQty = 5;
+        })
+      );
+    });
+
+    cy.visit("/test/book");
+
+    cy.getByTestId(ids.CTA).click();
+
+    cy.getByTestId("0", ids.COUNTER.ADD).click();
+
+    // it should skip 1 due to minOrderQty
+    cy.get(`[data-testid="${0}"] input[name="${0}"]`).invoke('val').should("eq", "2");
+
+    cy.getByTestId("0", ids.COUNTER.SUBTRACT).click();
+
+    cy.get(`[data-testid="${0}"] input[name="${0}"]`).invoke('val').should("eq", "0");
+
+    // should be limited by the number of people
+    cy.getByTestId("0", ids.COUNTER.ADD).click();
+    cy.getByTestId("0", ids.COUNTER.ADD).click();
+    cy.getByTestId("0", ids.COUNTER.ADD).should("be.disabled");
+
+    cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
+    cy.getByTestId("0", ids.COUNTER.ADD).should("not.be.disabled");
+
+    cy.getByTestId("0", ids.COUNTER.SUBTRACT).click();
+    cy.getByTestId("0", ids.COUNTER.SUBTRACT).click();
+    cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
+    cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
+
+    cy.getByTestId("1", ids.COUNTER.ADD).click();
+    cy.getByTestId("1", ids.COUNTER.ADD).click();
+    cy.getByTestId("1", ids.COUNTER.ADD).click();
+    cy.getByTestId("1", ids.COUNTER.ADD).click();
+    cy.getByTestId("1", ids.COUNTER.ADD).click();
+    cy.getByTestId("1", ids.COUNTER.ADD).should("be.disabled");
+
+    cy.getByTestId("1", ids.COUNTER.SUBTRACT).click();
+    cy.getByTestId("1", ids.COUNTER.SUBTRACT).click();
+    cy.getByTestId("1", ids.COUNTER.SUBTRACT).click();
+    cy.getByTestId("1", ids.COUNTER.SUBTRACT).click();
+    cy.getByTestId("1", ids.COUNTER.SUBTRACT).click();
+    cy.getByTestId("0", ids.COUNTER.ADD).click();
+    cy.getByTestId("0", ids.COUNTER.ADD).click();
+    cy.getByTestId("0", ids.COUNTER.ADD).click();
+    cy.getByTestId("0", ids.COUNTER.ADD).click();
+    cy.getByTestId("0", ids.COUNTER.ADD).click();
+    cy.getByTestId("0", ids.COUNTER.ADD).should("be.disabled");
+
+    cy.teardown();
+  });
+});

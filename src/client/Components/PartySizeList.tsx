@@ -127,8 +127,11 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
           Array.isArray(partySize.getMenu())) && <h2>Menu items</h2>}
         {Array.isArray(partySize.getMenu()) &&
           partySize.getMenu().map((menuItem: MenuItemType, index) => {
-            let minQty = menuItem.minOrderQty < 0 ? 0 : menuItem.minOrderQty;
-            let maxQty = menuItem.maxOrderQty < 0 ? 10 : menuItem.maxOrderQty;
+            let minQty =
+              (menuItem.minOrderQty < 0 || menuItem.minOrderQty > 10)
+                ? 0
+                : menuItem.minOrderQty;
+            let maxQty =(menuItem.maxOrderQty < 0 || menuItem.maxOrderQty > 10) ? 10 : menuItem.maxOrderQty;
             return (
               <MenuItem
                 title={menuItem.title}
@@ -143,6 +146,7 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
                 onAdd={() => handleAddMenuItem(menuItem.id, minQty)}
                 onSubtract={() => handleSubtractMenuItem(menuItem.id, minQty)}
                 testId={`${index}`}
+                className="menu-item"
               />
             );
           })}
