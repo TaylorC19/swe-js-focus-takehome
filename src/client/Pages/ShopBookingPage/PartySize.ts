@@ -9,4 +9,28 @@ export class PartySize {
     this.shop = shop;
     this.menu = menu;
   }
+
+  getMinPartySize() {
+    return this.shop.minNumPeople;
+  }
+
+  getMaxPartySize() {
+    return this.shop.maxNumPeople;
+  }
+
+  getShowSenior() {
+    return this.shop.showSenior;
+  }
+
+  getShowBaby() {
+    return this.shop.showBaby;
+  }
+
+  getShowChild() {
+    return this.shop.showChild;
+  }
+
+  getMenu() {
+    return this.menu;
+  }
 }
