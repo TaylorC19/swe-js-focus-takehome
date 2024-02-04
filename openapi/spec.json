@@ -41,34 +41,9 @@
         }
       }
     },
-    "/shops/{shop}": {
-      "get": {
-        "summary": "Get a single shop",
-        "responses": {
-          "200": {
-            "description": "All went well",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "slug",
-                    "minNumPeople",
-                    "maxNumPeople",
-                    "showBaby",
-                    "showChild",
-                    "showSenior"
-                  ],
-                  "$ref": "#/components/schemas/Shop"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/shops/{shop}/menu": {
       "get": {
-        "summary": "Get a single menu item",
+        "summary": "Get a single menu item from shop",
         "responses": {
           "200": {
             "description": "All went well",
@@ -93,7 +68,7 @@
     },
     "/shops/{id}/menu": {
       "get": {
-        "summary": "Get a single shop's menu",
+        "summary": "Get a single shop's menu by id",
         "responses": {
           "200": {
             "description": "All went well",
